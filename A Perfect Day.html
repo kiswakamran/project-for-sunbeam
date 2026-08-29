@@ -1,0 +1,1938 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Perfect Day</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+
+            background: linear-gradient(135deg, #87CEEB, #FFD6A5);
+
+            transition: background 1s ease;
+        }
+
+        /* =========================
+           BACKGROUNDS
+        ========================= */
+
+        body.morning {
+            background: linear-gradient(135deg, #87CEEB, #FFD6A5);
+        }
+
+        body.afternoon {
+            background: linear-gradient(135deg, #FFD166, #FFB703);
+        }
+
+        body.evening {
+            background: linear-gradient(135deg, #FF9A76, #E5989B, #6C63A8);
+        }
+
+        body.night {
+            background: linear-gradient(135deg, #101B3D, #263B73, #171B45);
+            color: white;
+        }
+
+        /* =========================
+           CLOUDS
+        ========================= */
+
+        .cloud {
+            position: fixed;
+            z-index: 0;
+            font-size: 65px;
+            pointer-events: none;
+            animation: moveCloud linear infinite;
+        }
+
+        .cloud1 {
+            top: 70px;
+            animation-duration: 20s;
+        }
+
+        .cloud2 {
+            top: 180px;
+            font-size: 50px;
+            animation-duration: 27s;
+        }
+
+        .cloud3 {
+            top: 320px;
+            font-size: 60px;
+            animation-duration: 23s;
+        }
+
+        @keyframes moveCloud {
+
+            from {
+                left: -150px;
+            }
+
+            to {
+                left: 110%;
+            }
+
+        }
+
+        /* =========================
+           STARS
+        ========================= */
+
+        .stars {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            display: none;
+        }
+
+        .night .stars {
+            display: block;
+        }
+
+        .star {
+            position: absolute;
+            font-size: 18px;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        .star:nth-child(1) {
+            top: 12%;
+            left: 15%;
+        }
+
+        .star:nth-child(2) {
+            top: 25%;
+            left: 75%;
+        }
+
+        .star:nth-child(3) {
+            top: 55%;
+            left: 25%;
+        }
+
+        .star:nth-child(4) {
+            top: 15%;
+            left: 50%;
+        }
+
+        .star:nth-child(5) {
+            top: 70%;
+            left: 80%;
+        }
+
+        .star:nth-child(6) {
+            top: 45%;
+            left: 65%;
+        }
+
+        @keyframes twinkle {
+
+            from {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+
+        }
+
+        /* =========================
+           TIMELINE
+        ========================= */
+
+        .timeline {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            width: 90%;
+            max-width: 900px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 8px;
+
+            z-index: 20;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(10px);
+
+            padding: 12px 18px;
+            border-radius: 30px;
+        }
+
+        .timeline span {
+            opacity: 0.45;
+            transition: 0.3s;
+        }
+
+        .timeline span.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .line {
+            width: 55px;
+            height: 3px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 10px;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+            display: none;
+
+            position: relative;
+            z-index: 5;
+
+            min-height: 100vh;
+
+            width: 100%;
+
+            padding: 130px 20px 70px;
+
+            animation: pageIn 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes pageIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* =========================
+           HEADINGS
+        ========================= */
+
+        h1 {
+            font-size: clamp(45px, 7vw, 75px);
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: clamp(30px, 5vw, 48px);
+            margin: 15px 0;
+        }
+
+        .subtitle {
+            font-size: 22px;
+            max-width: 700px;
+            margin: 15px auto;
+            line-height: 1.5;
+        }
+
+        .small-text {
+            font-size: 17px;
+            opacity: 0.8;
+            max-width: 650px;
+            margin: 20px auto;
+            line-height: 1.5;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .start-button,
+        .next-button,
+        .restart-button {
+
+            border: none;
+
+            padding: 16px 32px;
+
+            border-radius: 35px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 25px;
+
+            transition: 0.25s;
+
+            background: white;
+
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .start-button:hover,
+        .next-button:hover,
+        .restart-button:hover {
+
+            transform: translateY(-4px) scale(1.03);
+
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .options {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 20px;
+
+            width: 850px;
+
+            max-width: 95%;
+
+            margin: 35px auto;
+
+        }
+
+        .option {
+
+            border: none;
+
+            background: rgba(255,255,255,0.82);
+
+            border-radius: 25px;
+
+            padding: 25px 20px;
+
+            min-height: 135px;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            transition: 0.25s;
+
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .option:hover {
+
+            transform: translateY(-7px);
+
+            background: white;
+
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .option .emoji {
+
+            display: block;
+
+            font-size: 35px;
+
+            margin-bottom: 10px;
+        }
+
+        .option .title {
+
+            display: block;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .option .description {
+
+            display: block;
+
+            font-size: 14px;
+
+            opacity: 0.7;
+
+            line-height: 1.4;
+        }
+
+        /* =========================
+           ROUTE CARD
+        ========================= */
+
+        .route-card {
+
+            max-width: 700px;
+
+            margin: 30px auto;
+
+            padding: 30px;
+
+            background: rgba(255,255,255,0.75);
+
+            border-radius: 30px;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .route-card .route-emoji {
+
+            font-size: 65px;
+        }
+
+        .route-card h3 {
+
+            font-size: 28px;
+
+            margin: 10px 0;
+        }
+
+        .route-card p {
+
+            font-size: 17px;
+
+            line-height: 1.6;
+        }
+
+        /* =========================
+           FINAL RESULT
+        ========================= */
+
+        .result-card {
+
+            width: 900px;
+
+            max-width: 95%;
+
+            margin: 30px auto;
+
+            padding: 35px;
+
+            border-radius: 35px;
+
+            background: rgba(255,255,255,0.88);
+
+            color: #222;
+
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .result-title {
+
+            font-size: 42px;
+
+            font-weight: bold;
+
+            margin-bottom: 5px;
+        }
+
+        .result-description {
+
+            font-size: 18px;
+
+            line-height: 1.6;
+
+            max-width: 650px;
+
+            margin: 15px auto 30px;
+        }
+
+        /* =========================
+           SCORE
+        ========================= */
+
+        .score-number {
+
+            font-size: 55px;
+
+            font-weight: bold;
+
+            margin: 10px;
+        }
+
+        .score-bar {
+
+            height: 18px;
+
+            width: 100%;
+
+            background: #ddd;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin: 15px 0 30px;
+        }
+
+        .score-fill {
+
+            height: 100%;
+
+            width: 0%;
+
+            background: #555;
+
+            border-radius: 20px;
+
+            transition: width 1s ease;
+        }
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin: 25px 0;
+        }
+
+        .stat {
+
+            padding: 18px;
+
+            border-radius: 20px;
+
+            background: #f5f5f5;
+        }
+
+        .stat .stat-emoji {
+
+            font-size: 28px;
+        }
+
+        .stat strong {
+
+            display: block;
+
+            font-size: 25px;
+
+            margin-top: 5px;
+        }
+
+        /* =========================
+           DAY SUMMARY
+        ========================= */
+
+        .day-summary {
+
+            margin: 30px auto;
+
+            max-width: 750px;
+
+            padding: 20px;
+
+            background: #f5f5f5;
+
+            border-radius: 20px;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .timeline {
+
+                font-size: 9px;
+
+                padding: 10px;
+
+            }
+
+            .line {
+
+                width: 15px;
+
+            }
+
+            .options {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .stats {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+            .page {
+
+                padding-top: 110px;
+
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body class="morning">
+
+
+    
+
+    <!-- TIMELINE -->
+
+    <div class="timeline">
+
+        <span id="timeMorning" class="active"> MORNING</span>
+
+        <div class="line"></div>
+
+        <span id="timeAfternoon"> AFTERNOON</span>
+
+        <div class="line"></div>
+
+        <span id="timeEvening"> EVENING</span>
+
+        <div class="line"></div>
+
+        <span id="timeNight"> NIGHT</span>
+
+    </div>
+
+
+    <!-- =========================
+         PAGE 1
+    ========================= -->
+
+    <section id="page1" class="page active">
+
+        <h1> What Does YOUR Perfect Day Look Like?</h1>
+
+        <p class="subtitle">
+            There is no wrong answer.
+            Just your version of perfect.
+        </p>
+
+        <p class="small-text">
+            Every choice shapes your day — and reveals a little
+            something about you.
+        </p>
+
+        <button class="start-button" onclick="showPage(2)">
+            START MY DAY →
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         PAGE 2
+    ========================= -->
+
+    <section id="page2" class="page">
+
+        <h2> Wake Up</h2>
+
+        <p class="subtitle">
+            It's 8:00 AM. Your alarm rings.
+        </p>
+
+        <p class="small-text">
+            The world is awake. What do you do?
+        </p>
+
+
+        <div class="options">
+
+            <button class="option"
+                onclick="wakeChoice('snooze', 5, 1, 0, 3, 'Snooze For Another Hour')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Snooze for another hour
+                </span>
+
+                <span class="description">
+                    Sleep is important. The world can wait.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="wakeChoice('sunrise', 8, 3, 4, 5, 'Watch the sunrise')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Get up and watch the sunrise
+                </span>
+
+                <span class="description">
+                    Start the day peacefully while everyone sleeps.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="wakeChoice('scroll', 2, 0, 3, 2, 'Stay in bed and scroll')">
+
+                <span class="emoji">📱</span>
+
+                <span class="title">
+                    Stay in bed and scroll
+                </span>
+
+                <span class="description">
+                    Just five minutes... which somehow becomes twenty.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="wakeChoice('adventure', 10, 7, 3, 2, 'Get ready for an adventure')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Get ready for an adventure
+                </span>
+
+                <span class="description">
+                    Why waste the morning when there is a whole day ahead?
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PAGE 3
+    ========================= -->
+
+    <section id="page3" class="page">
+
+        <h2>🍳 Breakfast</h2>
+
+        <p class="subtitle">
+            You're hungry.
+        </p>
+
+        <p class="small-text">
+            What's your perfect breakfast?
+        </p>
+
+
+        <div class="options">
+
+            <button class="option"
+                onclick="breakfastChoice(5, 2, 2, 1, ' Pancakes + coffee')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Pancakes + coffee
+                </span>
+
+                <span class="description">
+                    Sweet, cozy and absolutely worth waking up for.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="breakfastChoice(4, 5, 1, 3, '🍳 Desi breakfast')">
+
+                <span class="emoji">🍳</span>
+
+                <span class="title">
+                    Desi breakfast
+                </span>
+
+                <span class="description">
+                    Paratha, eggs and a proper start to the day.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="breakfastChoice(5, 3, 5, 1, ' Fancy café')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Fancy café
+                </span>
+
+                <span class="description">
+                    Cute café, good food and main-character energy.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="breakfastChoice(8, 1, 3, 0, 'Food later > food now')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Skip breakfast
+                </span>
+
+                <span class="description">
+                    FOOD LATER > FOOD NOW. It's a lifestyle.
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PAGE 4
+    ========================= -->
+
+    <section id="page4" class="page">
+
+        <h2>🌎 The Plan</h2>
+
+        <p class="subtitle">
+            Now the day gets interesting.
+        </p>
+
+        <p class="small-text">
+            You suddenly have the entire day free.
+            Where are you going?
+        </p>
+
+
+        <div class="options">
+
+            <button class="option"
+                onclick="choosePlace('beach')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Beach
+                </span>
+
+                <span class="description">
+                    Sun, water, waves and absolutely no responsibilities.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="choosePlace('mountains')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Mountains
+                </span>
+
+                <span class="description">
+                    Fresh air, amazing views and a little adventure.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="choosePlace('city')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    City adventure
+                </span>
+
+                <span class="description">
+                    Shopping, exploring, food and absolutely no boring moments.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="choosePlace('home')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Stay home
+                </span>
+
+                <span class="description">
+                    Your bed is calling. You must answer.
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PAGE 4B
+         ROUTE RESULT
+    ========================= -->
+
+    <section id="routePage" class="page">
+
+        <div class="route-card">
+
+            <div id="routeEmoji" class="route-emoji">
+                
+            </div>
+
+            <h3 id="routeTitle">
+                Your adventure begins...
+            </h3>
+
+            <p id="routeText">
+                Your route is about to unfold.
+            </p>
+
+        </div>
+
+        <button class="next-button" onclick="showPage(5)">
+            CONTINUE →
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         PAGE 5
+    ========================= -->
+
+    <section id="page5" class="page">
+
+        <h2> Unexpected Event</h2>
+
+        <p class="subtitle">
+            Something unexpected happens...
+        </p>
+
+        <p class="small-text">
+            You're walking around when you find
+            <strong>Rs. 10,000</strong> lying on the ground.
+        </p>
+
+        <p class="subtitle">
+            What do you do?
+        </p>
+
+
+        <div class="options">
+
+            <button class="option"
+                onclick="eventChoice(2, 0, 5, 0, 'Keep it')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Keep it
+                </span>
+
+                <span class="description">
+                    Finders keepers... right?
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="eventChoice(5, 8, 2, 4, 'Find the owner')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Try to find the owner
+                </span>
+
+                <span class="description">
+                    Someone out there is probably having a terrible day.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="eventChoice(3, 7, 3, 5, 'Donate it')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Donate it
+                </span>
+
+                <span class="description">
+                    Turn an unexpected discovery into something meaningful.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="eventChoice(8, 2, 7, 0, 'Spend it')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Spend it on your perfect day
+                </span>
+
+                <span class="description">
+                    Well... today just got a LOT more interesting.
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PAGE 6
+    ========================= -->
+
+    <section id="page6" class="page">
+
+        <h2> Evening</h2>
+
+        <p class="subtitle">
+            The sun is going down.
+        </p>
+
+        <p class="small-text">
+            How do you end your day?
+        </p>
+
+
+        <div class="options">
+
+            <button class="option"
+                onclick="eveningChoice(6, 3, 3, 7, 'Watch the sunset')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Watch the sunset
+                </span>
+
+                <span class="description">
+                    Sit back and enjoy the moment.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="eveningChoice(8, 2, 5, 1, 'Gaming session')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Gaming session
+                </span>
+
+                <span class="description">
+                    One game. Maybe two. Definitely not five hours.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="eveningChoice(4, 9, 2, 3, 'Dinner with friends')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Dinner with friends
+                </span>
+
+                <span class="description">
+                    Good food is better with your favourite people.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="eveningChoice(7, 4, 9, 1, 'Concert / music')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Concert / music
+                </span>
+
+                <span class="description">
+                    Loud music, good vibes and unforgettable memories.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="eveningChoice(2, 2, 4, 10, 'Quiet night alone')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Quiet night alone
+                </span>
+
+                <span class="description">
+                    A book, some peace and absolutely zero notifications.
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PAGE 7
+    ========================= -->
+
+    <section id="page7" class="page">
+
+        <h2> The Final Choice</h2>
+
+        <p class="subtitle">
+            Your perfect day is almost over.
+        </p>
+
+        <p class="small-text">
+            You get one final hour. What do you choose?
+        </p>
+
+
+        <div class="options">
+
+            <button class="option"
+                onclick="finalChoice(3, 10, 2, 5, 'Spend it with family')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Spend it with family
+                </span>
+
+                <span class="description">
+                    End the day with the people who know you best.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="finalChoice(5, 10, 5, 3, 'Spend it with friends')">
+
+                <span class="emoji">🫂</span>
+
+                <span class="title">
+                    Spend it with friends
+                </span>
+
+                <span class="description">
+                    One last laugh before the day ends.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="finalChoice(5, 9, 6, 4, 'Someone special')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Spend it with someone special
+                </span>
+
+                <span class="description">
+                    Some moments are better when shared.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="finalChoice(2, 2, 4, 10, 'Completely alone')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Spend it completely alone
+                </span>
+
+                <span class="description">
+                    Quiet, peaceful and completely yours.
+                </span>
+
+            </button>
+
+
+            <button class="option"
+                onclick="finalChoice(10, 3, 8, 1, 'Go somewhere new')">
+
+                <span class="emoji"></span>
+
+                <span class="title">
+                    Go somewhere you've never been
+                </span>
+
+                <span class="description">
+                    Because the best stories start with “I wonder what's there?”
+                </span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PAGE 8
+    ========================= -->
+
+    <section id="page8" class="page">
+
+        <div class="result-card">
+
+            <div class="result-title">
+             YOUR PERFECT DAY
+            </div>
+
+            <h2 id="personality">
+                The Free Spirit 
+            </h2>
+
+            <p id="personalityDescription" class="result-description">
+                You don't need a perfect plan.
+                You need freedom, new experiences and people who make you laugh.
+            </p>
+
+
+            <h3>
+                Your Perfect Day Score
+            </h3>
+
+            <div id="scoreNumber" class="score-number">
+                0/100
+            </div>
+
+            <div class="score-bar">
+
+                <div id="scoreFill" class="score-fill"></div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div class="stat-emoji"></div>
+
+                    Adventure
+
+                    <strong id="adventureScore">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-emoji"></div>
+
+                    Connection
+
+                    <strong id="connectionScore">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-emoji"></div>
+
+                    Creativity
+
+                    <strong id="creativityScore">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <div class="stat-emoji"></div>
+
+                    Peace
+
+                    <strong id="peaceScore">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="day-summary">
+
+                <strong>Your day:</strong>
+
+                <br><br>
+
+                <span id="daySummary">
+                    Sunrise → Pancakes → Beach →
+                    Unexpected Adventure → Sunset →
+                    Friends → Stars
+                </span>
+
+            </div>
+
+
+            <h3>
+                Would you live this day again?
+            </h3>
+
+
+            <p style="font-size: 30px;">
+                 ABSOLUTELY 
+            </p>
+
+
+            <button class="restart-button" onclick="restartGame()">
+                 PLAY AGAIN
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <script>
+
+        /* =========================
+           GAME DATA
+        ========================= */
+
+        let scores = {
+
+            adventure: 0,
+
+            connection: 0,
+
+            creativity: 0,
+
+            peace: 0
+
+        };
+
+
+        let choices = [];
+
+
+        let selectedPlace = "";
+
+
+        /* =========================
+           PAGE SYSTEM
+        ========================= */
+
+        function showPage(pageNumber) {
+
+            document.querySelectorAll(".page").forEach(function(page) {
+
+                page.classList.remove("active");
+
+            });
+
+
+            document.getElementById("page" + pageNumber).classList.add("active");
+
+
+            updateTimeline(pageNumber);
+
+
+            updateBackground(pageNumber);
+
+        }
+
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        function updateBackground(pageNumber) {
+
+            document.body.classList.remove(
+                "morning",
+                "afternoon",
+                "evening",
+                "night"
+            );
+
+
+            if (pageNumber <= 3) {
+
+                document.body.classList.add("morning");
+
+            }
+
+            else if (pageNumber <= 5) {
+
+                document.body.classList.add("afternoon");
+
+            }
+
+            else if (pageNumber == 6) {
+
+                document.body.classList.add("evening");
+
+            }
+
+            else {
+
+                document.body.classList.add("night");
+
+            }
+
+        }
+
+
+        /* =========================
+           TIMELINE
+        ========================= */
+
+        function updateTimeline(pageNumber) {
+
+            document.querySelectorAll(".timeline span").forEach(function(item) {
+
+                item.classList.remove("active");
+
+            });
+
+
+            if (pageNumber <= 3) {
+
+                document.getElementById("timeMorning").classList.add("active");
+
+            }
+
+            else if (pageNumber <= 5) {
+
+                document.getElementById("timeAfternoon").classList.add("active");
+
+            }
+
+            else if (pageNumber == 6) {
+
+                document.getElementById("timeEvening").classList.add("active");
+
+            }
+
+            else {
+
+                document.getElementById("timeNight").classList.add("active");
+
+            }
+
+        }
+
+
+        /* =========================
+           ADD SCORE
+        ========================= */
+
+        function addScore(adventure, connection, creativity, peace) {
+
+            scores.adventure += adventure;
+
+            scores.connection += connection;
+
+            scores.creativity += creativity;
+
+            scores.peace += peace;
+
+        }
+
+
+        /* =========================
+           WAKE UP
+        ========================= */
+
+        function wakeChoice(
+            choice,
+            adventure,
+            connection,
+            creativity,
+            peace,
+            label
+        ) {
+
+            addScore(
+                adventure,
+                connection,
+                creativity,
+                peace
+            );
+
+
+            choices.push(label);
+
+
+            showPage(3);
+
+        }
+
+
+        /* =========================
+           BREAKFAST
+        ========================= */
+
+        function breakfastChoice(
+            adventure,
+            connection,
+            creativity,
+            peace,
+            label
+        ) {
+
+            addScore(
+                adventure,
+                connection,
+                creativity,
+                peace
+            );
+
+
+            choices.push(label);
+
+
+            showPage(4);
+
+        }
+
+
+        /* =========================
+           PLACE / ROUTE
+        ========================= */
+
+        function choosePlace(place) {
+
+            selectedPlace = place;
+
+
+            if (place === "beach") {
+
+                addScore(10, 4, 5, 6);
+
+                choices.push("Beach");
+
+
+                document.getElementById("routeEmoji").innerText = "🏖️";
+
+                document.getElementById("routeTitle").innerText =
+                    "Beach Day Unlocked! 🌊";
+
+                document.getElementById("routeText").innerText =
+                    "You head toward the beach. First up: water activities, salty air and way too much fun. Later, you'll watch the sun disappear into the horizon.";
+
+            }
+
+
+            else if (place === "mountains") {
+
+                addScore(10, 3, 5, 8);
+
+                choices.push("Mountains");
+
+
+                document.getElementById("routeEmoji").innerText = "🌲";
+
+                document.getElementById("routeTitle").innerText =
+                    "Mountain Adventure Unlocked! 🏔️";
+
+                document.getElementById("routeText").innerText =
+                    "You head into the mountains. Hiking trails lead you higher and higher until you find the perfect place for a campfire.";
+
+            }
+
+
+            else if (place === "city") {
+
+                addScore(7, 5, 10, 2);
+
+                choices.push("City Adventure");
+
+
+                document.getElementById("routeEmoji").innerText = "🎡";
+
+                document.getElementById("routeTitle").innerText =
+                    "City Adventure Unlocked! ";
+
+                document.getElementById("routeText").innerText =
+                    "The city is calling. You explore shops, discover random things you definitely didn't need, and end up at an arcade.";
+
+            }
+
+
+            else {
+
+                addScore(2, 4, 5, 10);
+
+                choices.push("Stay Home");
+
+
+                document.getElementById("routeEmoji").innerText = "🏠";
+
+                document.getElementById("routeTitle").innerText =
+                    "Cozy Day Unlocked! ";
+
+                document.getElementById("routeText").innerText =
+                    "You stay home. Snacks appear. Your favourite show starts. Somehow, doing absolutely nothing becomes exactly what you needed.";
+
+            }
+
+
+            document.querySelectorAll(".page").forEach(function(page) {
+
+                page.classList.remove("active");
+
+            });
+
+
+            document.getElementById("routePage").classList.add("active");
+
+
+            updateBackground(4);
+
+            updateTimeline(4);
+
+        }
+
+
+        /* =========================
+           UNEXPECTED EVENT
+        ========================= */
+
+        function eventChoice(
+            adventure,
+            connection,
+            creativity,
+            peace,
+            label
+        ) {
+
+            addScore(
+                adventure,
+                connection,
+                creativity,
+                peace
+            );
+
+
+            choices.push(label);
+
+
+            showPage(6);
+
+        }
+
+
+        /* =========================
+           EVENING
+        ========================= */
+
+        function eveningChoice(
+            adventure,
+            connection,
+            creativity,
+            peace,
+            label
+        ) {
+
+            addScore(
+                adventure,
+                connection,
+                creativity,
+                peace
+            );
+
+
+            choices.push(label);
+
+
+            showPage(7);
+
+        }
+
+
+        /* =========================
+           FINAL CHOICE
+        ========================= */
+
+        function finalChoice(
+            adventure,
+            connection,
+            creativity,
+            peace,
+            label
+        ) {
+
+            addScore(
+                adventure,
+                connection,
+                creativity,
+                peace
+            );
+
+
+            choices.push(label);
+
+
+            showResults();
+
+        }
+
+
+        /* =========================
+           FINAL RESULTS
+        ========================= */
+
+        function showResults() {
+
+            let rawTotal =
+                scores.adventure +
+                scores.connection +
+                scores.creativity +
+                scores.peace;
+
+
+            let maxPossible = 220;
+
+
+            let finalScore =
+                Math.round((rawTotal / maxPossible) * 100);
+
+
+            if (finalScore > 100) {
+
+                finalScore = 100;
+
+            }
+
+
+            document.getElementById("scoreNumber").innerText =
+                finalScore + "/100";
+
+
+            document.getElementById("scoreFill").style.width =
+                finalScore + "%";
+
+
+            let adventure =
+                Math.min(100, Math.round(scores.adventure * 4));
+
+
+            let connection =
+                Math.min(100, Math.round(scores.connection * 4));
+
+
+            let creativity =
+                Math.min(100, Math.round(scores.creativity * 4));
+
+
+            let peace =
+                Math.min(100, Math.round(scores.peace * 4));
+
+
+            document.getElementById("adventureScore").innerText =
+                adventure;
+
+
+            document.getElementById("connectionScore").innerText =
+                connection;
+
+
+            document.getElementById("creativityScore").innerText =
+                creativity;
+
+
+            document.getElementById("peaceScore").innerText =
+                peace;
+
+
+            let highest =
+                Math.max(
+                    adventure,
+                    connection,
+                    creativity,
+                    peace
+                );
+
+
+            let personality = "";
+
+            let description = "";
+
+
+            if (highest === adventure) {
+
+                personality = "The Free Spirit 🌊";
+
+                description =
+                    "You don't need a perfect plan. You need freedom, new experiences and stories you'll still be talking about later.";
+
+            }
+
+
+            else if (highest === connection) {
+
+                personality = "The Heart of the Party ❤️";
+
+                description =
+                    "For you, a perfect day is about the people around you. The best memories are the ones you get to share.";
+
+            }
+
+
+            else if (highest === creativity) {
+
+                personality = "The Dreamer ";
+
+                description =
+                    "Your perfect day is never ordinary. You love new ideas, exciting places and turning random moments into memories.";
+
+            }
+
+
+            else {
+
+                personality = "The Peace Seeker 🧘";
+
+                description =
+                    "You know that a perfect day doesn't have to be busy. Peace, comfort and having time to yourself matter most.";
+
+            }
+
+
+            document.getElementById("personality").innerText =
+                personality;
+
+
+            document.getElementById("personalityDescription").innerText =
+                description;
+
+
+            document.getElementById("daySummary").innerText =
+                choices.join(" → ");
+
+
+            showPage(8);
+
+        }
+
+
+        /* =========================
+           RESTART
+        ========================= */
+
+        function restartGame() {
+
+            scores = {
+
+                adventure: 0,
+
+                connection: 0,
+
+                creativity: 0,
+
+                peace: 0
+
+            };
+
+
+            choices = [];
+
+
+            selectedPlace = "";
+
+
+            document.getElementById("scoreFill").style.width = "0%";
+
+
+            showPage(1);
+
+        }
+
+    </script>
+
+</body>
+</html>
